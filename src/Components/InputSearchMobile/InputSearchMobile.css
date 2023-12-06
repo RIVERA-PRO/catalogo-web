@@ -1,0 +1,103 @@
+.inputSearchMobile{
+  font-size: 20px;
+       
+        color: #aeadad
+}
+.modalSearchMobileContain{
+  background-color: rgba(0, 0, 0, 0.403);
+  display: flex;
+   
+  position: absolute;
+  
+  height: 100vh;
+ 
+  right: 0px;
+  left: 0px;
+  bottom: 0;
+  padding: 10px 5%;
+  flex-direction: column;
+
+ 
+}
+.modalSearchMobile {
+  background-color: var(--blanco);
+  display: flex;
+  position: fixed;
+  bottom: -1.4rem;
+  height: 80vh;
+  right: 0;
+  left: 0;
+  padding: 10px 5%;
+ 
+  flex-direction: column;
+  border-radius: 10px 10px 0 0;
+}
+.close{
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color2);
+}
+  .inputSearschMobile{
+    background-color: var(  --gris)!important;
+   
+    border-radius: 20px;
+    border: 0.3px solid #00000037;
+    padding: 4px 7px;
+
+    color: var(--text-color2);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  .modalMobile {
+    position: absolute;
+    top: calc(5rem + 1px);
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    max-height: 79%;
+    overflow-y:scroll;
+    border-radius: 7px ;
+    transition: all .40s ease;
+    padding: 10px 5%;
+}
+.modalMobile a{
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2rem ;
+}
+.search-icon2{
+  background-color: var(--color1);
+  color: var(--blanco);
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 100%;
+  cursor: pointer;
+
+}
+
+@media screen and (max-width: 767px) and (orientation: landscape) {
+  .modalSearchMobile {
+  
+   
+    height: 90vh;
+ 
+  }
+  .modalSearchMobileContain{
+  
+    
+    height: 100vh;
+  
+  }
+  .modalMobile {
+    position: absolute;
+    top: calc(6rem + 1px);
+   
+    max-height: 59%;
+  
+}
+}

@@ -1,0 +1,31 @@
+.titleSection{
+    padding: 40px 2% 0px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.titleSection h3{
+    font-size: 30px;
+    color: var(--text-color2);
+}
+.titleSection a{
+    font-size: 17px;
+    color: var(--text-color2);
+}
+@media (max-width: 710px) {
+    .titleSection h3{
+        font-size: 17px;
+        font-weight: 700;
+        
+    }
+    .titleSection a{
+        font-size: 14px;
+       
+    }
+    .titleSection{
+        padding: 0px 3% 0px;
+        margin-bottom: -10px;
+     
+    
+    }
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogos</title>
+</head>
+
+<body>
+    <h1>Catálogos</h1>
+    <ul id="catalogos-list"></ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const catalogosList = document.getElementById('catalogos-list');
+
+            // Obtener datos de la base de datos utilizando PHP
+            fetch('./all_catalogos.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Mostrar los datos en la lista
+                    data.forEach(catalogo => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `<strong>${catalogo.nombre}</strong> - ${catalogo.descripcion} - <img src="data:image/png;base64,${catalogo.imagen}" alt="Imagen del catálogo" />`;
+                        catalogosList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error al obtener datos:', error));
+        });
+    </script>
+</body>
+
+</html>
