@@ -5,9 +5,9 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link as Anchor } from "react-router-dom";
-import './Productos.css';
+import './ProductosHome.css';
 import 'swiper/swiper-bundle.css';
-const Productos = () => {
+const ProductosHome = () => {
     const [catalogos, setCatalogos] = useState([]);
     const [loading, setLoading] = useState(true);
     const swiperRef = useRef(null);
@@ -34,7 +34,51 @@ const Productos = () => {
         <div className='productosHome'>
 
             {loading ? (
-                <LoadingProductos />
+                <Swiper
+                    effect={'coverflow'}
+                    grabCursor={true}
+                    loop={true}
+                    slidesPerView={'auto'}
+                    coverflowEffect={{ rotate: 0, stretch: 0, depth: 100, modifier: 2.5 }}
+                    navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+                    autoplay={{ delay: 3000 }} // Cambia el valor de 'delay' según tus preferencias
+
+                    onSwiper={(swiper) => {
+                        console.log(swiper);
+                        swiperRef.current = swiper;
+                    }}
+                    id={"swiper_container_scroll"}
+                >
+                    <SwiperSlide id={"swiperCardScroll2"} >
+                        <div className='cardloadin2'>
+
+                        </div>
+                    </SwiperSlide>
+
+
+                    <SwiperSlide id={"swiperCardScroll2"} >
+                        <div className='cardloadin2'>
+
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide id={"swiperCardScroll2"} >
+                        <div className='cardloadin2'>
+
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide id={"swiperCardScroll2"} >
+                        <div className='cardloadin2'>
+
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide id={"swiperCardScroll2"} >
+                        <div className='cardloadin2'>
+
+                        </div>
+                    </SwiperSlide>
+
+
+                </Swiper>
             ) : (
 
                 <Swiper
@@ -53,13 +97,13 @@ const Productos = () => {
                     id={"swiper_container_scroll"}
                 >
 
-                    {catalogos.map(catalogo => (
+                    {catalogos.reverse().map(catalogo => (
 
-                        <SwiperSlide key={catalogo?.id} id={"swiperCardScroll"}>
-                            <div className='cardScroll'>
+                        <SwiperSlide key={catalogo?.id} id={"swiperCardScroll2"}>
+                            <div className='cardScroll2'>
 
 
-                                <Anchor to={`producto/${catalogo.id}/${catalogo.nombre.replace(/\s+/g, '-')}`}>
+                                <Anchor to={`producto/${catalogo.id}/${catalogo.nombre.replace(/\s+/g, '-')}`} >
                                     <Swiper
                                         effect={'coverflow'}
                                         grabCursor={true}
@@ -73,7 +117,7 @@ const Productos = () => {
                                             console.log(swiper);
                                             swiperRef.current = swiper;
                                         }}
-
+                                        id={"swiperCardScrollImg2"}
                                     >
                                         {[catalogo?.imagen, catalogo?.imagen2, catalogo?.imagen3, catalogo?.imagen4].map((image, index) => (
                                             image && (
@@ -88,11 +132,11 @@ const Productos = () => {
                                         ))}
                                     </Swiper>
                                 </Anchor>
-                                <div className='cardText'>
+                                <div className='cardText2'>
                                     <h3>{catalogo?.nombre}</h3>
                                     <p>{catalogo?.descripcion} </p>
 
-                                    <div className='deFlexbtns'>
+                                    <div className='deFlexbtns2'>
                                         <h4>$ {catalogo?.precio}</h4>
                                         <button className="cart" >
                                             <FontAwesomeIcon icon={faShoppingCart} />
@@ -110,4 +154,4 @@ const Productos = () => {
     );
 };
 
-export default Productos;
+export default ProductosHome;

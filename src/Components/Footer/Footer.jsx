@@ -13,20 +13,20 @@ export default function Footer() {
             <div className='footerGrid'>
                 <div className='contact-footer'>
                     <img src={logo} alt="" />
-                    <Anchor>Lorem ipsum dolor sit amet consectetur adipisicing elit. </Anchor>
+                    <Anchor>Conectando tu mundo con tecnología innovadora. Descubre la excelencia en cada dispositivo</Anchor>
 
                 </div>
                 <div className='contact-footer'>
 
                     <Anchor>3875683101 </Anchor>
                     <Anchor>Salta, Argentina</Anchor>
-                    <Anchor>modadeportiva@gmail.com</Anchor>
+                    <Anchor>faugetdigital@gmail.com</Anchor>
                 </div>
                 <div className='contact-footer'>
 
-                    <Anchor to={`/`} >Remeras </Anchor>
-                    <Anchor to={`/`}>Zapatillas </Anchor>
-                    <Anchor to={`/`}>Pantalones </Anchor>
+                    <Anchor to={`/`} >Inicio </Anchor>
+                    <Anchor to={`/`}>Nosotros </Anchor>
+                    <Anchor to={`/`}>Productos </Anchor>
                 </div>
 
                 <div className='contact-footer'>

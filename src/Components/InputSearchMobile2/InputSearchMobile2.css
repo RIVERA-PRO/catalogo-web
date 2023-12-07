@@ -1,0 +1,36 @@
+#enlaceMobile2{
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: left;
+    gap: 1rem;
+  
+    border: 1px solid #aeadad ;
+    border-radius: 7px;
+    padding: 6px 6px;
+}
+#enlaceMobile2 span{
+    color: #aeadad;
+    font-size: 18px;
+}
+.inputSearchMobile2{
+    color: var(--blanco);
+    background-color: var(--color1);
+    padding: 8px;
+ 
+    font-size: 14px;
+    border-radius: 100%;
+    cursor: pointer;
+    
+}
+.InputSearchMobileContain2{
+   display: none;
+}
+@media (max-width: 1020px) {
+    .InputSearchMobileContain2{
+        padding: 0px 3%;
+        padding-top: 70px;
+        display: inline-block;
+        width: 100%;
+    }
+}

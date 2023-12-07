@@ -17,7 +17,7 @@ export default function LoadingProductos() {
 
 
     return (
-        <div className='productosHome'>
+        <div >
 
 
 

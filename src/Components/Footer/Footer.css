@@ -11,10 +11,8 @@
 }
 .foter{
     background-color: var(--bg-color);
-    background-image: url(../../images/bg.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 70px 6% 30px;
+    background: linear-gradient(0deg, var(--color2)-30%,var(--color1)100%);
+    padding: 70px 10% 30px;
     margin-top: 2rem;
     border-radius: 2rem 2rem 0px 0px ;
     

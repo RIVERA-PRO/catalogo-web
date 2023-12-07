@@ -1,6 +1,6 @@
 
 .productosHome{
-    padding: 10px 2%;
+    padding: 10px 9%;
 }
 
 #swiper_container_scroll{
@@ -92,8 +92,8 @@
   
 @media (max-width: 710px) {
     .cardScroll{
-        width: 26vh;
-        height: 29vh;
+        width: 22vh;
+        height: 27vh;
     }
     .cardScroll p{
         color: var(--text-color2);
@@ -116,12 +116,12 @@
         font-weight: 500;
     }
     #swiperCardScroll{
-        width: 26vh;
+        width: 22vh;
         margin: 15px 6px;
     }
     .cardloadin{
-        width: 26vh;
-        height: 29vh;
+        width: 22vh;
+        height: 27vh;
         background: linear-gradient(90deg, #fff, #d2d1d1, #e8e6e6);
         background-size: 400% 400%;
         animation: gradientMove 1s linear infinite;
@@ -139,6 +139,10 @@
    .cart{
   
     font-size: 17px!important;
+}
+
+.productosHome{
+    padding: 10px 2%;
 }
 }
 @media screen and (max-width: 967px) and (orientation: landscape){

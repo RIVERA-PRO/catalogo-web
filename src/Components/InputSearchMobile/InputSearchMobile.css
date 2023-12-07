@@ -1,7 +1,20 @@
 .inputSearchMobile{
-  font-size: 20px;
+  font-size: 16px;
        
         color: #aeadad
+}
+#enlaceMobile{
+  font-size: 16px;
+ display: flex;
+ gap: 3px;
+ flex-direction: column;
+  color: #aeadad
+}
+
+#enlaceMobile span{
+  font-size: 12px;
+ 
+  color: #aeadad
 }
 .modalSearchMobileContain{
   background-color: rgba(0, 0, 0, 0.403);
@@ -28,7 +41,7 @@
   right: 0;
   left: 0;
   padding: 10px 5%;
- 
+ z-index: 10000;
   flex-direction: column;
   border-radius: 10px 10px 0 0;
 }

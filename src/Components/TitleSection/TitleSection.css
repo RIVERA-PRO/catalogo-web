@@ -1,5 +1,5 @@
 .titleSection{
-    padding: 40px 2% 0px;
+    padding: 40px 10% 0px;
     display: flex;
     justify-content: space-between;
 
@@ -10,7 +10,7 @@
 }
 .titleSection a{
     font-size: 17px;
-    color: var(--text-color2);
+    color: var(--color1);
 }
 @media (max-width: 710px) {
     .titleSection h3{

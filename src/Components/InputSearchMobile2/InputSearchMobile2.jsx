@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./InputSearchs.css";
+import "./InputSearchMobile2.css";
 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faSearch } from '@fortawesome/free-solid-svg-icons'; // Importa el icono de búsqueda
+import axios from 'axios';
 
-export default function InputSearchs() {
+export default function InputSearchMobile2() {
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredProductos, setFilteredProductos] = useState([]);
     const [showResults, setShowResults] = useState(false);
@@ -57,25 +58,37 @@ export default function InputSearchs() {
     const closeModal = () => {
         setModalOpen(false);
     };
-
     return (
-        <div className="fondo-input">
-            <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={openModal} />
+        <div className="InputSearchMobileContain2">
+
+
+
+
+            <div id="enlaceMobile2" onClick={openModal}  >
+
+                <FontAwesomeIcon icon={faSearch} className="inputSearchMobile2" />
+                <span>Buscar</span>
+            </div>
+
             {modalOpen && (
-                <div className="modalSearch">
-                    <div className="modalSearch-content">
-                        <span className="close" onClick={closeModal}>&times;</span>
-                        <div className="inputSearch" onClick={openModal}>
-                            <FontAwesomeIcon icon={faSearch} className="search-icon" />
+                <div className="modalSearchMobileContain">
+                    <div className="modalSearchMobile">
+                        <span className="close" onClick={closeModal}>X</span>
+                        <div className="inputSearschMobile" >
+
+
+                            <FontAwesomeIcon icon={faSearch} className="search-icon2" />
+
                             <input
                                 type="text"
                                 placeholder="Buscar..."
+
                                 value={searchTerm}
                                 onChange={handleSearch}
                                 className="input"
                             />
                             {showResults && (
-                                <div className="modal">
+                                <div className="modalMobile">
                                     {filteredProductos.map((producto) => (
                                         <div key={producto.id}>
                                             <button className="btn-music" onClick={() => handleButtonClick(producto)}></button>
