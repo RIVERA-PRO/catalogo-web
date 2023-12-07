@@ -93,7 +93,7 @@ const Productos = () => {
                                     <p>{catalogo?.descripcion} </p>
 
                                     <div className='deFlexbtns'>
-                                        <h4>$ {catalogo?.precio}</h4>
+                                        <h4>$ {catalogo?.precio?.toLocaleString()}</h4>
                                         <button className="cart" >
                                             <FontAwesomeIcon icon={faShoppingCart} />
                                         </button>

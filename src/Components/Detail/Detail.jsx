@@ -62,13 +62,13 @@ export default function Detail() {
     };
     const handleWhatsappMessage = () => {
         const phoneNumber = '3875683101';
-        const message = `¡Hola! 🌟 Estoy interesado en el producto:\n\n${producto?.categoria} - ${producto?.nombre} - $${producto?.precio}.\n\nProducto: https://tu-sitio-web.com/producto/${producto?.id}\n\n¿Podrías proporcionarme más información? 🤔`;
+        const message = `¡Hola! 🌟 Estoy interesado en el producto:\n\n${producto?.categoria} - ${producto?.nombre} - $${producto?.precio}.\n\nProducto: https://www.faugetdigital.shop/producto/${producto?.id}/${producto?.nombre.replace(/\s+/g, '-')}\n\n¿Podrías proporcionarme más información? 🤔`;
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     };
 
     return (
-        <>
+        <div className="contain-detail">
             <div className='fondoDetail'>
 
             </div>
@@ -113,7 +113,7 @@ export default function Detail() {
                                 <Anchor to={`/products`}>
                                     <FontAwesomeIcon icon={faStar} /> Categoria / {producto.categoria}
                                 </Anchor>
-                                <h2>$ {producto.precio}</h2>
+                                <h2>$ {producto.precio?.toLocaleString()}</h2>
                                 <div className="btns_final">
                                     <button className="agregar" >
                                         Agregar al carrito
@@ -140,6 +140,6 @@ export default function Detail() {
                         <p>No se encontró la publicación.</p>
                     </div>
                 )}
-            </div></>
+            </div></div>
     );
 }

@@ -24,7 +24,7 @@ export default function MainLayout() {
 
     return (
         <div>
-            {windowWidth >= breakpoint && <Header />}
+            <Header />
             <Outlet />
             <Footer />
             <NavbarMobile />

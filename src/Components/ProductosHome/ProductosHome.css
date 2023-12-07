@@ -20,17 +20,26 @@
     display: flex;
     background-color: var(--blanco);
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.097);
+ 
 }
 
 
-.cardcardScrollText2 h3{
+.cardScroll2 h3{
     color: var(--text-color);
-    font-size: 16px;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 23ch;
+    font-weight: 500;
 }
 .cardScroll2 p{
     color: var(--text-color2);
     font-size: 14px;
-  
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 35ch;
 }
 .cardScroll2 h4{
     color: var(--color1);
@@ -42,6 +51,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+   
 }
 .cardText2{
     display: flex;
@@ -49,6 +59,7 @@
     justify-content: space-around;
     gap: 10px;
     padding: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.186);
 }
 .deFlexbtns2{
     display: flex;
@@ -83,16 +94,16 @@
 @media (max-width: 710px) {
     .cardScroll2{
         width: 100%;
-        height: 16vh;
+        height: 14vh;
     }
     .cardScroll2 p{
         color: var(--text-color2);
         font-size: 12px;
-      
+        max-width: 27ch;
     }
     .cardScroll2 h4{
         color: var(--color1);
-        font-size: 13px;
+        font-size: 16px;
         background-color: transparent;
         padding: 0;
         border-radius: 0;
@@ -104,7 +115,7 @@
         white-space: nowrap;
         
         text-overflow: ellipsis;
-        max-width: 15ch;
+        max-width: 20ch;
         font-weight: 500;
     }
     #swiperCardScroll2{
@@ -116,7 +127,7 @@
       }
     .cardloadin2{
         width: 40vh;
-        height: 16vh;
+        height: 15vh;
         background: linear-gradient(90deg, #fff, #d2d1d1, #e8e6e6);
         background-size: 400% 400%;
         animation: gradientMove 1s linear infinite;
@@ -125,7 +136,7 @@
     }
     .cardScroll2 img{
         width: 100%;
-        height: 16vh;
+        height: 15vh;
         object-fit: cover;
     }
    .cardText{

@@ -8,8 +8,13 @@
     align-self: center;
     align-content: center;
     padding:50px 7%;
+   
  
 }
+.contain-detail{
+    background-color: var(--gris);
+}
+
 .no_hay{
     height: 60vh;
     display: flex;
@@ -44,12 +49,13 @@
 
 
 .detail h1{
-    font-size: 40px;
+    font-size: 30px;
     color: var(--text-color);
+    font-weight: 600;
 }
 .detail h2{
     font-size: 35px;
-    color: var(--text-color2);
+    color: var(--color2);
 }
 .detail p{
     font-size: 15px;
@@ -72,7 +78,7 @@
 }
 
 .agregar{
-    background-color: var(--color1);
+    background-color: var(--color2);
     color: var(--blanco);
     font-size: 15px;
     border-radius: 7px;
@@ -213,7 +219,7 @@
     
     .detail-contain{
       
-        padding: 0px 0%;
+        padding: 45px 0%;
     }
     .imgDivs{
         flex-direction: row;

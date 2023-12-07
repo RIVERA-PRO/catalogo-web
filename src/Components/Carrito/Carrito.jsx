@@ -53,7 +53,7 @@ Total:$ ${totalPrice}
 
 
     return (
-        <div>
+        <div className='carrito_contain'>
             <div className='fondoPage'>
                 <Anchor to={`/`}>Inicio</Anchor>
                 |
