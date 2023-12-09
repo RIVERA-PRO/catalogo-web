@@ -79,7 +79,7 @@
     padding: 10px 30px;
 }
 .cardCarritoText a{
-    background-color:  var(--color1);
+    background-color:  var(--color2);
     color: var(--blanco);
     padding: 4px 10px;
     border-radius: 4px;
@@ -87,7 +87,16 @@
 }
 .cardCarritoText h3{
     color: var(--text-color1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40ch;
+    font-weight: 600;
 }
+.cardCarritoText h4{
+    color: var(--color1);
+   
+ }
 .cardCarritoText p{
     color: var(--text-color2);
 }
@@ -114,6 +123,7 @@
 }
 .card_pago  h3{
     color: green;
+
 }
 .deFlexTotal{
     display: flex;
@@ -170,8 +180,7 @@
     font-size: 13px;
  }
  .cardCarritoText a{
-    background-color:  var(--color1);
-    color: var(--blanco);
+   
     padding: 2px 8px;
     border-radius: 4px;
    font-size: 11px;

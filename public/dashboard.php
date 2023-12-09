@@ -5,6 +5,13 @@ $contrasena = "Makarovsi100";
 $dbname = "u605883457_catalogos";
 $mensaje = "";
 
+session_start();
+if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+    // Redirigir al formulario de inicio de sesión o mostrar un mensaje de no autorizado
+    header("Location: loginDashboard.php");
+    exit();
+}
+
 try {
     $dsn = "mysql:host=$servidor;dbname=$dbname";
     $conexion = new PDO($dsn, $usuario, $contrasena);
@@ -128,7 +135,10 @@ try {
    
 </head>
 <body>
-    <h2>Crear Nuevo Catálogo</h2>
+<div id="crearCatalogoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCrearCatalogoModal()">&times;</span>
+        <h2>Crear Nuevo Catálogo</h2>
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -139,8 +149,14 @@ try {
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" name="descripcion" required></textarea>
         <br>
-         <label for="categoria">Categoria:</label>
-        <textarea id="categoria" name="categoria" required></textarea>
+        <label for="categoria">Categoria:</label>
+<select id="categoria" name="categoria" required>
+    <option value="notebook">Notebook</option>
+    <option value="auricular">Auricular</option>
+    <option value="celular">Celular</option>
+    <option value="perifericos">Periféricos</option>
+</select>
+
         <br>
      
          <label for="precio">Precio:</label>
@@ -164,9 +180,12 @@ try {
         <button type="submit">Crear Catálogo</button>
     </form>
 
+    </div>
+</div>
     <div>
         <?php echo $mensaje; ?>
     </div>
+    <button onclick="openCrearCatalogoModal()">Crear Catálogo</button>
 
     <h2>Catálogos Existentes</h2>
     <?php if ($resultado): ?>
@@ -198,7 +217,13 @@ try {
                 <textarea id="descripcion_editar" name="descripcion_editar" required><?php echo $catalogo['descripcion']; ?></textarea>
                 <br>
                 <label for="categoriaEditar">Categoria:</label>
-                <textarea id="categoriaEditar" name="categoriaEditar" required><?php echo $catalogo['categoria']; ?></textarea>
+<select id="categoriaEditar" name="categoriaEditar" required>
+    <option value="notebook" <?php echo ($catalogo['categoria'] === 'notebook') ? 'selected' : ''; ?>>Notebook</option>
+    <option value="auricular" <?php echo ($catalogo['categoria'] === 'auriculares') ? 'selected' : ''; ?>>Auricular</option>
+    <option value="celular" <?php echo ($catalogo['categoria'] === 'celulares') ? 'selected' : ''; ?>>Celular</option>
+    <option value="perifericos" <?php echo ($catalogo['categoria'] === 'perifericos') ? 'selected' : ''; ?>>Periféricos</option>
+</select>
+
                 <br>
                 <label for="precioEditar">Precio:</label>
                 <textarea id="precioEditar" name="precioEditar" required><?php echo $catalogo['precio']; ?></textarea>
@@ -245,15 +270,24 @@ try {
 
     <script>
         // Funciones para mostrar/ocultar el modal
-        function openModal(id, nombre, descripcion) {
-            document.getElementById("myModal" + id).style.display = "block";
-            document.getElementById("nombre_editar").value = nombre;
-            document.getElementById("descripcion_editar").value = descripcion;
-        }
+     function openModal(id) {
+    console.log("Abriendo modal para el ID:", id);
+    document.getElementById("myModal" + id).style.display = "block";
+}
+
+
+
 
         function closeModal(id) {
             document.getElementById("myModal" + id).style.display = "none";
         }
+        function openCrearCatalogoModal() {
+        document.getElementById("crearCatalogoModal").style.display = "block";
+    }
+
+    function closeCrearCatalogoModal() {
+        document.getElementById("crearCatalogoModal").style.display = "none";
+    }
     </script>
 </body>
 </html>

@@ -14,7 +14,7 @@ export default function InputSearchs() {
 
     useEffect(() => {
         // Obtener datos de la base de datos utilizando PHP
-        fetch('/all_catalogos.php')  // Update the URL to your PHP endpoint
+        fetch('/catalogoApi.php')  // Update the URL to your PHP endpoint
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

@@ -7,13 +7,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link as Anchor } from "react-router-dom";
 import './Productos.css';
 import 'swiper/swiper-bundle.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Productos = () => {
     const [catalogos, setCatalogos] = useState([]);
     const [loading, setLoading] = useState(true);
     const swiperRef = useRef(null);
     useEffect(() => {
         // Obtener datos de la base de datos utilizando PHP
-        fetch('/all_catalogos.php')
+        fetch('/catalogoApi.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -29,10 +31,34 @@ const Productos = () => {
                 setLoading(false); // Cambiar el estado de carga a falso en caso de error
             });
     }, []); // Se ejecuta solo una vez al montar el componente
+    const agregarAlCarrito = (id) => {
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        const productoEnCarrito = carrito.find((item) => item.id === id);
 
+        if (productoEnCarrito) {
+            // Si el producto ya está en el carrito, incrementa la cantidad
+            productoEnCarrito.cantidad += 1;
+        } else {
+            // Si el producto no está en el carrito, agrégalo
+            carrito.push({
+                id,
+                nombre: catalogos.find((item) => item.id === id)?.nombre,
+                categoria: catalogos.find((item) => item.id === id)?.categoria,
+                precio: catalogos.find((item) => item.id === id)?.precio,
+                imagen: catalogos.find((item) => item.id === id)?.imagen,
+                cantidad: 1, // Nueva propiedad para la cantidad
+            });
+        }
+
+        // Actualiza el carrito en el almacenamiento local
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        // Puedes mostrar una alerta o mensaje de éxito aquí si lo deseas
+        toast.success('Agregado al carrito');
+    };
     return (
         <div className='productosHome'>
-
+            <ToastContainer />
             {loading ? (
                 <LoadingProductos />
             ) : (
@@ -94,7 +120,7 @@ const Productos = () => {
 
                                     <div className='deFlexbtns'>
                                         <h4>$ {catalogo?.precio?.toLocaleString()}</h4>
-                                        <button className="cart" >
+                                        <button className='cart' onClick={() => agregarAlCarrito(catalogo.id)}>
                                             <FontAwesomeIcon icon={faShoppingCart} />
                                         </button>
                                     </div>

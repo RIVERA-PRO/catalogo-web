@@ -1,0 +1,37 @@
+.loadingHero{
+    display: flex;
+    width: 100%;
+    height: 93vh;
+      overflow: hidden;
+      border-radius: 0rem 0rem 2rem 2rem;
+      background: linear-gradient(90deg, #fff, #d2d1d1, #e8e6e6);
+    background-size: 400% 400%;
+    animation: gradientMove 1s linear infinite;
+    -webkit-animation: gradientMove 1s linear infinite;
+    color: transparent;
+    user-select: none;
+}
+@media (max-width: 1020px) {
+   
+    .loadingHero{
+        width: 100%;
+        height: 40vh;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+}
+@media (max-width: 700px){
+   .loadingHero{
+        width: 100%;
+        height: 20vh;
+      
+    }
+}
+
+@media screen and (max-width: 967px) and (orientation: landscape){
+   .loadingHero{
+        width: 100%;
+        height: 40vh;
+      
+    }
+}

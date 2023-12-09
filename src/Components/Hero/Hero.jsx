@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Hero.css';
 import img1 from '../../images/1.png';
 import img2 from '../../images/2.png';
@@ -7,7 +7,7 @@ import img4 from '../../images/4.png';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-
+import HeroLoading from '../HeroLoading/HeroLoading';
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 export default function Hero() {
@@ -16,9 +16,15 @@ export default function Hero() {
     }, []);
 
     const swiperRef = useRef(null);
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+
+    const handleImagesLoad = () => {
+        setImagesLoaded(true);
+    };
 
     return (
         <div className='heroContain'>
+            {!imagesLoaded && <HeroLoading />}
             <Swiper
                 effect={'coverflow'}
                 grabCursor={true}
@@ -35,17 +41,17 @@ export default function Hero() {
                 id={"swiper_container_img"}
             >
                 <SwiperSlide id={"swiperImg"} >
-                    <img src={img1} alt="" />
+                    <img src={img1} alt="" onLoad={handleImagesLoad} />
                 </SwiperSlide>
                 <SwiperSlide id={"swiperImg"} >
-                    <img src={img2} alt="" />
+                    <img src={img2} alt="" onLoad={handleImagesLoad} />
                 </SwiperSlide>
 
                 <SwiperSlide id={"swiperImg"} >
-                    <img src={img3} alt="" />
+                    <img src={img3} alt="" onLoad={handleImagesLoad} />
                 </SwiperSlide>
                 <SwiperSlide id={"swiperImg"} >
-                    <img src={img4} alt="" />
+                    <img src={img4} alt="" onLoad={handleImagesLoad} />
                 </SwiperSlide>
             </Swiper>
         </div>

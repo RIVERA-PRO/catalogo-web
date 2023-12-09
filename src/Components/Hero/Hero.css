@@ -16,10 +16,7 @@
       height: 93vh;
       overflow: hidden;
       border-radius: 0rem 0rem 2rem 2rem;
-      -webkit-border-radius: 0rem 0rem 2rem 2rem;
-      -moz-border-radius: 0rem 0rem 2rem 2rem;
-      -ms-border-radius: 0rem 0rem 2rem 2rem;
-      -o-border-radius: 0rem 0rem 2rem 2rem;
+    
 }
   
   #swiperImg img{

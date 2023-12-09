@@ -30,7 +30,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 23ch;
+    max-width: 20ch;
     font-weight: 500;
 }
 .cardScroll2 p{
@@ -39,12 +39,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 35ch;
+    max-width: 25ch;
 }
 .cardScroll2 h4{
     color: var(--color1);
-    font-size: 17px;
-    padding: 5px;
+    font-size: 18px;
+   
    
 }
 .cardScroll2 img{

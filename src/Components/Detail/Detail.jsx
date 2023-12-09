@@ -12,6 +12,8 @@ import 'swiper/swiper-bundle.min.css';
 import { Modal } from 'react-responsive-modal';
 import Swal from 'sweetalert2';
 import wpp from '../../images/wpp.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Detail() {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ export default function Detail() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`/all_catalogos.php`);  // Update the URL to your PHP endpoint
+                const response = await fetch(`/catalogoApi.php`);  // Update the URL to your PHP endpoint
                 if (response.ok) {
                     const data = await response.json();
                     const selectedProduct = data.find(product => product.id === parseInt(id));
@@ -62,13 +64,41 @@ export default function Detail() {
     };
     const handleWhatsappMessage = () => {
         const phoneNumber = '3875683101';
-        const message = `¡Hola! 🌟 Estoy interesado en el producto:\n\n${producto?.categoria} - ${producto?.nombre} - $${producto?.precio}.\n\nProducto: https://www.faugetdigital.shop/producto/${producto?.id}/${producto?.nombre.replace(/\s+/g, '-')}\n\n¿Podrías proporcionarme más información? 🤔`;
+        const message = `¡Hola! 🌟 Estoy interesado en el producto:\n\n${producto?.categoria} \n\n ${producto?.nombre} \n\n $${producto?.precio?.toLocaleString()}.\n\nProducto: https://www.faugetdigital.shop/producto/${producto?.id}/${producto?.nombre.replace(/\s+/g, '-')}\n\n¿Podrías proporcionarme más información? 🤔`;
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     };
 
+
+    const agregarAlCarrito = () => {
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        const productoEnCarrito = carrito.find(item => item.id === producto.id);
+
+        if (productoEnCarrito) {
+            // Si el producto ya está en el carrito, incrementa la cantidad
+            productoEnCarrito.cantidad += 1;
+        } else {
+            // Si el producto no está en el carrito, agrégalo
+            carrito.push({
+                id: producto.id,
+                nombre: producto.nombre,
+                categoria: producto.categoria,
+                precio: producto.precio,
+                imagen: producto.imagen,
+                cantidad: 1, // Nueva propiedad para la cantidad
+            });
+        }
+
+        // Actualiza el carrito en el almacenamiento local
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        // Puedes mostrar una alerta o mensaje de éxito aquí si lo deseas
+
+        toast.success('Agregado al carrito');
+    };
     return (
         <div className="contain-detail">
+            <ToastContainer />
             <div className='fondoDetail'>
 
             </div>
@@ -115,7 +145,7 @@ export default function Detail() {
                                 </Anchor>
                                 <h2>$ {producto.precio?.toLocaleString()}</h2>
                                 <div className="btns_final">
-                                    <button className="agregar" >
+                                    <button className="agregar" onClick={agregarAlCarrito} >
                                         Agregar al carrito
                                     </button>
                                     <button className="consultar" onClick={handleWhatsappMessage}>
