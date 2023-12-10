@@ -93,7 +93,7 @@ export default function InputSearchMobile() {
                                         <div key={producto.id}>
                                             <button className="btn-music" onClick={() => handleButtonClick(producto)}></button>
                                             <Link to={`/producto/${producto.id}/${producto.nombre.replace(/\s+/g, '-')}`} onClick={closeModal}>
-                                                <FontAwesomeIcon icon={faSignOutAlt} />
+
                                                 <p>{producto.nombre} - {producto.categoria}</p>
                                             </Link>
                                         </div>

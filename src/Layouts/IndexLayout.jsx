@@ -18,9 +18,9 @@ export default function IndexLayout() {
             <InputSearchMobile2 />
             <Hero />
 
-            <TitleSection section="Productos" link="products" />
+            <TitleSection section="Productos" link="productos" />
             <Productos />
-            <TitleSection section="Destacados" link="products" />
+            <TitleSection section="Destacados" link="productos" />
             <ProductosHome />
             <Footer />
 

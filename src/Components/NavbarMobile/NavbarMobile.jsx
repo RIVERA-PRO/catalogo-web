@@ -78,13 +78,13 @@ export default function NavbarMobile() {
                         <Anchor to={`/`}>
                             Inicio
                         </Anchor>
-                        <Anchor to={`/products`}>
+                        <Anchor to={`/nosotros`}>
                             Nosotros
                         </Anchor>
-                        <Anchor to={`/products`}>
+                        <Anchor to={`/contacto`}>
                             Contacto
                         </Anchor>
-                        <Anchor to={`/products`}>
+                        <Anchor to={`/productos`}>
                             Productos
                         </Anchor>
 
