@@ -154,7 +154,8 @@ try {
     <option value="notebook">Notebook</option>
     <option value="auricular">Auricular</option>
     <option value="celular">Celular</option>
-    <option value="perifericos">Periféricos</option>
+    <option value="teclado">Teclado</option>
+    <option value="mouse">Mouse</option>
 </select>
 
         <br>
@@ -221,7 +222,8 @@ try {
     <option value="notebook" <?php echo ($catalogo['categoria'] === 'notebook') ? 'selected' : ''; ?>>Notebook</option>
     <option value="auricular" <?php echo ($catalogo['categoria'] === 'auriculares') ? 'selected' : ''; ?>>Auricular</option>
     <option value="celular" <?php echo ($catalogo['categoria'] === 'celulares') ? 'selected' : ''; ?>>Celular</option>
-    <option value="perifericos" <?php echo ($catalogo['categoria'] === 'perifericos') ? 'selected' : ''; ?>>Periféricos</option>
+    <option value="teclado" <?php echo ($catalogo['categoria'] === 'teclado') ? 'selected' : ''; ?>>Teclado</option>
+       <option value="mouse" <?php echo ($catalogo['categoria'] === 'mouse') ? 'selected' : ''; ?>>Mouse</option>
 </select>
 
                 <br>

@@ -40,7 +40,7 @@ export default function ProductosPage() {
     }, []);
 
     const [priceRange, setPriceRange] = useState({
-        min: 10000,
+        min: 1000,
         max: 3000000,
     });
 
@@ -115,7 +115,7 @@ export default function ProductosPage() {
                             <h3>Filtrar por precio:</h3>
                             <input
                                 type="range"
-                                min="10000"
+                                min="1000"
                                 max="3000000"
                                 value={priceRange.min}
                                 onChange={(e) =>
@@ -124,7 +124,7 @@ export default function ProductosPage() {
                             />
                             <input
                                 type="range"
-                                min="10000"
+                                min="1000"
                                 max="3000000"
                                 value={priceRange.max}
                                 onChange={(e) =>
