@@ -10,18 +10,12 @@ import LoadingCarrito from '../LoadingCarrito/LoadingCarrito';
 import wpp from '../../images/wpp.png'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 export default function Carrito() {
     const [products, setProducts] = useState([]);
     const [showSpiral, setShowSpiral] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [userData, setUserData] = useState(null);
 
-    const updateUserData = () => {
-        const user = localStorage.getItem('user');
-        if (user) {
-            setUserData(JSON.parse(user));
-        }
-    };
 
     const obtenerProductosEnCarrito = () => {
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -35,7 +29,7 @@ export default function Carrito() {
     };
 
     useEffect(() => {
-        updateUserData();
+
         obtenerProductosEnCarrito();
     }, []);
 
@@ -77,7 +71,37 @@ Total:$ ${totalPrice?.toLocaleString()}
     };
 
 
+    const finalizarCompra = () => {
+        // Crear un array con los detalles de cada producto
+        const productosParaCompra = products.map((item) => ({
+            id: item.id,
+            nombre: item.nombre,
+            precio: item.precio,
+            cantidad: item.cantidad,
+        }));
 
+        // Realizar la solicitud POST a la ruta /compra con el precio total y detalles de productos
+        axios.post('https://catalogopago.onrender.com/buy', {
+            total: totalPrice,
+            productos: productosParaCompra,
+
+
+        })
+
+            .then(response => {
+
+                window.location.href = response.data.response.body.init_point
+                console.log(response.data);
+
+                console.log(productosParaCompra);
+            })
+            .catch(error => {
+
+                console.error(error);
+                console.log(productosParaCompra)
+
+            });
+    };
 
 
     return (
@@ -119,7 +143,7 @@ Total:$ ${totalPrice?.toLocaleString()}
                                     <h3>Total: </h3>
                                     <h3>$ {totalPrice?.toLocaleString()}</h3>
                                 </div>
-                                <button className="agregar">Finalizar Compra</button>
+                                <button className="agregar" onClick={finalizarCompra}>Finalizar Compra</button>
                                 <button className="consultar" onClick={handleWhatsappMessage}>
                                     Consultar al
                                     <img src={wpp} alt="" />
