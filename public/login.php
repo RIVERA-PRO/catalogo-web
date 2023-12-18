@@ -53,22 +53,24 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
     <title>Fauguet - Iniciar Sesión</title>
 </head>
 <body>
-    <h2>Iniciar Sesión</h2>
-    <form action="" method="POST">
-        <label for="email_login">Correo Electrónico:</label>
-        <input type="email" id="email_login" name="email_login" required>
-
-        <br>
-        <label for="contrasena_login">Contraseña:</label>
-        <input type="password" id="contrasena_login" name="contrasena_login" required>
-
-        <br>
+   
+   <div class="formContainer">
+   <form action="" method="POST">
+        <h2>Iniciar Sesión</h2>
+      
+        <input type="email" id="email_login" name="email_login" placeholder="Email"   required>
+      
+        <input type="password" id="contrasena_login" name="contrasena_login" placeholder="Contraseña" required>
         <button type="submit" name="iniciar_sesion">Iniciar Sesión</button>
+  <div class="deFLex">
+  <p>¿ No tienes una cuenta ?</p> <a href="registro.php">Registrarse</a>
+  </div>
     </form>
+   </div>
 
     <div>
         <?php echo $mensajeLogin; ?>

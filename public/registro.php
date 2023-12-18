@@ -52,33 +52,40 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleAdmin.css">
+    <link rel="stylesheet" href="login.css">
     <title>Fauguet Admin - Crear Usuario</title>
 </head>
 <body>
-    <h2>Crear Nuevo Usuario</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for="nombre_usuario">Nombre:</label>
-        <input type="text" id="nombre_usuario" name="nombre_usuario" required>
+   
+<div class="formContainer">
+   <form action="" method="POST" enctype="multipart/form-data">
+    <h2>Registrarse</h2>
+       
+        <input type="text" id="nombre_usuario" name="nombre_usuario" required placeholder="Nombre">
 
-        <br>
-        <label for="email_usuario">Correo Electrónico:</label>
-        <input type="email" id="email_usuario" name="email_usuario" required>
+      
+      
+        <input type="email" id="email_usuario" name="email_usuario" required placeholder="Email">
 
-        <br>
-        <label for="contrasena_usuario">Contraseña:</label>
-        <input type="password" id="contrasena_usuario" name="contrasena_usuario" required>
+        
+      
+        <input type="password" id="contrasena_usuario" name="contrasena_usuario" required placeholder="Contraseña">
 
-        <!-- Campo "rol" con valor predeterminado -->
+      
         <input type="hidden" id="rol_usuario" name="rol_usuario" value="usuario">
 
-        <br>
-        <label for="imagen_usuario">Imagen:</label>
-        <input type="file" id="imagen_usuario" name="imagen_usuario" accept="image/*" required>
+     
+      
+        <input type="file" id="imagen_usuario" name="imagen_usuario" accept="image/*" required placeholder="Imagen">
 
-        <br>
-        <button type="submit" name="crear_usuario">Crear Usuario</button>
+        
+        <button type="submit" name="crear_usuario">Registrar</button>
+       
+        <div class="deFLex">
+        <p>¿ Ya tienes una cuenta ?</p> <a href="login.php">Iniciar Sesion</a>
+  </div>
     </form>
+   </div>
 
     <div>
         <?php echo $mensajeUsuario; ?>

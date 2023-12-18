@@ -13,7 +13,14 @@ try {
     $conexion = new PDO($dsn, $usuario, $contrasena);
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Obtener el ID del usuario desde la sesión (asumiendo que ya iniciaste sesión)
+    // Verificar la sesión del usuario
+    session_start();
+    if (!isset($_SESSION['usuario_id'])) {
+        echo json_encode(["error" => "Usuario no autenticado"]);
+        exit();
+    }
+
+    // Obtener el ID del usuario desde la sesión
     $usuarioId = $_SESSION['usuario_id'];
 
     // Consulta SQL para obtener datos del usuario
@@ -22,15 +29,20 @@ try {
     $stmtUsuario->bindParam(':id', $usuarioId);
     
     if ($stmtUsuario->execute()) {
-        // Obtener resultados
-        $resultadoUsuario = $stmtUsuario->fetch(PDO::FETCH_ASSOC);
+        // Verificar si hay resultados
+        if ($stmtUsuario->rowCount() > 0) {
+            // Obtener resultados
+            $resultadoUsuario = $stmtUsuario->fetch(PDO::FETCH_ASSOC);
 
-        // Convertir la imagen a Base64
-        $imagenUsuario = $resultadoUsuario['imagen'];
-        $resultadoUsuario['imagen'] = base64_encode($imagenUsuario);
+            // Convertir la imagen a Base64
+            $imagenUsuario = $resultadoUsuario['imagen'];
+            $resultadoUsuario['imagen'] = base64_encode($imagenUsuario);
 
-        // Imprimir datos del usuario en formato JSON
-        echo json_encode($resultadoUsuario);
+            // Imprimir datos del usuario en formato JSON
+            echo json_encode($resultadoUsuario);
+        } else {
+            echo json_encode(["error" => "Usuario no encontrado"]);
+        }
     } else {
         // Imprimir mensaje de error si la ejecución de la consulta falla
         echo json_encode(["error" => "Error al ejecutar la consulta SQL: " . implode(", ", $stmtUsuario->errorInfo())]);
@@ -41,5 +53,8 @@ try {
 } catch (Exception $error) {
     // Manejar otros tipos de errores
     echo json_encode(["error" => "Error desconocido: " . $error->getMessage()]);
+} finally {
+    // Cerrar la conexión a la base de datos
+    $conexion = null;
 }
 ?>

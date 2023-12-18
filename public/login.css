@@ -1,0 +1,110 @@
+:root{
+    --text-color: #000;
+    --text-color2: #5c5959;
+    --bg-color: #111111;
+    --gris:#fafafa;
+    --gris2:#f2f2f2;
+    --color1:#240354;
+    --color2:#752FB5;
+    --color3:rgba(31, 135, 233, 0.455);
+    --blanco: #fff;
+    --input:#c1bfbf;
+  }
+
+  *{
+    padding: 0 ;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 0.2s linear;
+   
+  }
+.formContainer{
+    display: flex;
+    padding: 50px 10%;
+    flex-direction: column;
+    place-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.formContainer h2{
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.formContainer form{
+    display: flex;
+    padding: 2% 2%;
+    gap: 20px;
+    flex-direction: column;
+    place-content: center;
+    border: 0.3px solid #00000037;
+    background-color:var(--blanco);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.097);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+input{
+    border-radius: 10px;
+    width: 50vh;
+    background-color:var(--blanco);
+    padding: 10px 15px;
+    border: 0.3px solid #00000037;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+label{
+    font-size: 14px;
+}
+button{
+    border-radius: 10px;
+    width: 100%;
+    background-color: var(--color2);
+    color: var(--blanco);
+    padding: 13px 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px #742fb517;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+ .deFLex{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    text-align: center;
+    place-content: center;
+    align-items: center;
+    justify-content: center;
+ }
+ .deFLex p{
+    color: var(--text-color);
+    text-align: center;
+ }
+ .deFLex a{
+    color: var(--color2);
+    text-decoration: none;
+    text-align: center;
+ }
+
+ @media (max-width: 600px) {
+    input{
+       
+        width: 100%;
+      
+    }
+    .formContainer{
+      
+        padding: 50px 5%;
+      
+    }
+ }
