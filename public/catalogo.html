@@ -4,35 +4,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleAdmin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Catálogos</title>
 </head>
 
 <body>
-    <h1>Catálogos</h1>
-    <ul id="catalogos-list"></ul>
+    <nav class="navbarDashboard" onclick="toggleNavbarWidth()">
+        <img src="./logo2.png" alt="logo">
+
+        <a href="#" id="catalogo-link"><span class="icon"><i class="fas fa-home"></i></span>Inicio</a>
+        <a href="usuarios.php" id="usuarios-link"><span class="icon"><i class="fas fa-user"></i></span>Usuarios</a>
+    </nav>
+
+    <div class="table-container">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Imagen</th>
+                    <th>Imagen2</th>
+                    <th>Imagen3</th>
+                    <th>Imagen4</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>UsuarioUsuarioUsuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td><button class="editar_btn"> <span class="action-icon"><i class="fas fa-edit"></i></span>
+                        </button> <button class="eliminar_btn"><a href=""> <span class="action-icon"><i
+                                        class="fas fa-trash"></i></span></a></button></td>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Usuario 1</td>
+                    <td>usuario1@example.com</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td> <img src="../src/images/logo.png" alt=""></td>
+                    <td>Usuario 2 Usuario 2 </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const catalogosList = document.getElementById('catalogos-list');
+        // Obtener el nombre de la página actual
+        var currentPage = window.location.pathname.split('/').pop().toLowerCase();
 
-            // Obtener datos de la base de datos utilizando PHP
-            fetch('./catalogoApi.php')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Mostrar los datos en la lista
-                    data.forEach(catalogo => {
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = `<strong>${catalogo.nombre}</strong> - ${catalogo.descripcion} - <img src="data:image/png;base64,${catalogo.imagen}" alt="Imagen del catálogo" />`;
-                        catalogosList.appendChild(listItem);
-                    });
-                })
-                .catch(error => console.error('Error al obtener datos:', error));
-        });
+        // Asignar la clase "active" al enlace correspondiente
+        if (currentPage === 'catalogo.html' || currentPage === '') {
+            document.getElementById('catalogo-link').classList.add('active');
+        } else if (currentPage === 'productos.html') {
+            document.getElementById('productos-link').classList.add('active');
+        } else if (currentPage === 'usuarios.html') {
+            document.getElementById('usuarios-link').classList.add('active');
+        }
     </script>
 </body>
 

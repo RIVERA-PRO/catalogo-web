@@ -54,6 +54,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Fauguet - Iniciar Sesión</title>
 </head>
 <body>
@@ -72,8 +73,17 @@ try {
     </form>
    </div>
 
-    <div>
-        <?php echo $mensajeLogin; ?>
-    </div>
+    
+    <?php if (!empty($mensajeLogin)): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'info',
+                title: 'Mensaje',
+                text: "<?php echo $mensajeLogin; ?>",
+            });
+        });
+    </script>
+<?php endif; ?>
 </body>
 </html>

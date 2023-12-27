@@ -16,7 +16,17 @@
     margin: 0;
     box-sizing: border-box;
     transition: all 0.2s linear;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  }
+
+  body{
+    display: flex;
    
+    flex-direction: column;
+    place-content: center;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
   }
 .formContainer{
     display: flex;
@@ -25,6 +35,7 @@
     place-content: center;
     align-items: center;
     justify-content: center;
+    align-self: center;
 }
 .formContainer h2{
     text-align: center;
@@ -34,7 +45,7 @@
 
 .formContainer form{
     display: flex;
-    padding: 2% 2%;
+    padding: 30px 30px;
     gap: 20px;
     flex-direction: column;
     place-content: center;
@@ -42,10 +53,7 @@
     background-color:var(--blanco);
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.097);
     border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+   width: 100%;
 }
 input{
     border-radius: 10px;
@@ -102,9 +110,12 @@ button{
         width: 100%;
       
     }
+    .formContainer form{
+        padding: 30px 10px;
+    }
     .formContainer{
       
-        padding: 50px 5%;
+        padding: 50px 3%;
       
     }
  }

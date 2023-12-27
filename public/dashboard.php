@@ -5,6 +5,9 @@ $contrasena = "Makarovsi100";
 $dbname = "u605883457_catalogos";
 $mensaje = "";
 
+
+
+
 session_start();
 if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
     // Redirigir al formulario de inicio de sesión o mostrar un mensaje de no autorizado
@@ -48,12 +51,12 @@ try {
                 $stmt->bindParam(':precio', $precio);
                 $stmt->execute();
 
-                $mensaje = "Catálogo creado exitosamente.";
+                $mensaje = "Producto creado exitosamente.";
             } else {
                 $mensaje = "Por favor, seleccione una imagen válida.";
             }
         } else {
-            $mensaje = "Por favor, complete todos los campos del formulario.";
+            $mensaje = "Editado correctamente";
         }
     }
 
@@ -72,46 +75,64 @@ try {
         $descripcionEditar = $_POST['descripcion_editar'];
         $categoriaEditar = $_POST['categoriaEditar'];
         $precioEditar = $_POST['precioEditar'];
-        // Verificar si se ha enviado una nueva imagen
+    
+        // Verificar si se ha enviado una nueva imagen principal
         if (isset($_FILES['imagen_editar']) && $_FILES['imagen_editar']['error'] === UPLOAD_ERR_OK) {
-            // Procesar y guardar la nueva imagen
+            // Procesar y guardar la nueva imagen principal
             $imagenTempEditar = $_FILES['imagen_editar']['tmp_name'];
             $imagenDatosEditar = file_get_contents($imagenTempEditar);
-
-            $imagenTempEditar2 = $_FILES['imagen_editar2']['tmp_name'];
-            $imagenDatosEditar2 = file_get_contents($imagenTempEditar2);
-
-            $imagenTempEditar3 = $_FILES['imagen_editar3']['tmp_name'];
-            $imagenDatosEditar3 = file_get_contents($imagenTempEditar3);
-
-            $imagenTempEditar4 = $_FILES['imagen_editar4']['tmp_name'];
-            $imagenDatosEditar4 = file_get_contents($imagenTempEditar4);
-
-            // Actualizar la base de datos con la nueva imagen
-            $sqlUpdate = "UPDATE `catalogos` SET nombre = :nombre, descripcion = :descripcion, categoria= :categoria, imagen = :imagen, imagen2 = :imagen2 , imagen3 = :imagen3, imagen4 = :imagen4, precio=:precio WHERE id = :id";
-            $stmt = $conexion->prepare($sqlUpdate);
-            $stmt->bindParam(':nombre', $nombreEditar);
-            $stmt->bindParam(':descripcion', $descripcionEditar);
-            $stmt->bindParam(':categoria', $categoriaEditar);
-            $stmt->bindParam(':imagen', $imagenDatosEditar, PDO::PARAM_LOB);
-            $stmt->bindParam(':imagen2', $imagenDatosEditar2, PDO::PARAM_LOB);
-            $stmt->bindParam(':imagen3', $imagenDatosEditar3, PDO::PARAM_LOB);
-            $stmt->bindParam(':imagen4', $imagenDatosEditar4, PDO::PARAM_LOB);
-            $stmt->bindParam(':precio', $precioEditar);
-            $stmt->bindParam(':id', $idEditar);
-            $stmt->execute();
         } else {
-            // Procesar y guardar la información sin actualizar la imagen
-            $sqlUpdate = "UPDATE `catalogos` SET nombre = :nombre, descripcion = :descripcion, categoria= :categoria, precio=:precio WHERE id = :id";
-            $stmt = $conexion->prepare($sqlUpdate);
-            $stmt->bindParam(':nombre', $nombreEditar);
-            $stmt->bindParam(':descripcion', $descripcionEditar);
-            $stmt->bindParam(':categoria', $categoriaEditar);
-            $stmt->bindParam(':precio', $precioEditar);
-            $stmt->bindParam(':id', $idEditar);
-            $stmt->execute();
+            // Mantener la imagen principal existente si no se envía una nueva
+            $sqlImagenExistente = "SELECT imagen FROM `catalogos` WHERE id = :id";
+            $stmtImagenExistente = $conexion->prepare($sqlImagenExistente);
+            $stmtImagenExistente->bindParam(':id', $idEditar);
+            $stmtImagenExistente->execute();
+            $resultadoImagenExistente = $stmtImagenExistente->fetch(PDO::FETCH_ASSOC);
+    
+            $imagenDatosEditar = $resultadoImagenExistente['imagen'];
         }
+    
+        // Verificar y procesar las otras imágenes si se han enviado
+        foreach (range(2, 4) as $imagenNumero) {
+            $nombreCampoImagen = "imagen_editar{$imagenNumero}";
+    
+            if (isset($_FILES[$nombreCampoImagen]) && $_FILES[$nombreCampoImagen]['error'] === UPLOAD_ERR_OK) {
+                $imagenTempEditar = $_FILES[$nombreCampoImagen]['tmp_name'];
+                $nombreParametroImagen = ":imagen{$imagenNumero}";
+    
+                // Procesar y guardar la nueva imagen
+                ${"imagenDatosEditar{$imagenNumero}"} = file_get_contents($imagenTempEditar);
+            } else {
+                // Mantener la imagen existente si no se envía una nueva
+                $nombreCampoImagenExistente = "imagen{$imagenNumero}";
+    
+                $sqlImagenExistente = "SELECT {$nombreCampoImagenExistente} FROM `catalogos` WHERE id = :id";
+                $stmtImagenExistente = $conexion->prepare($sqlImagenExistente);
+                $stmtImagenExistente->bindParam(':id', $idEditar);
+                $stmtImagenExistente->execute();
+                $resultadoImagenExistente = $stmtImagenExistente->fetch(PDO::FETCH_ASSOC);
+    
+                ${"imagenDatosEditar{$imagenNumero}"} = $resultadoImagenExistente[$nombreCampoImagenExistente];
+            }
+        }
+    
+        // Actualizar la base de datos con las nuevas imágenes y la información
+        $sqlUpdate = "UPDATE `catalogos` SET nombre = :nombre, descripcion = :descripcion, categoria = :categoria, 
+                      imagen = :imagen, imagen2 = :imagen2, imagen3 = :imagen3, imagen4 = :imagen4, precio = :precio 
+                      WHERE id = :id";
+        $stmt = $conexion->prepare($sqlUpdate);
+        $stmt->bindParam(':nombre', $nombreEditar);
+        $stmt->bindParam(':descripcion', $descripcionEditar);
+        $stmt->bindParam(':categoria', $categoriaEditar);
+        $stmt->bindParam(':imagen', $imagenDatosEditar, PDO::PARAM_LOB);
+        $stmt->bindParam(':imagen2', $imagenDatosEditar2, PDO::PARAM_LOB);
+        $stmt->bindParam(':imagen3', $imagenDatosEditar3, PDO::PARAM_LOB);
+        $stmt->bindParam(':imagen4', $imagenDatosEditar4, PDO::PARAM_LOB);
+        $stmt->bindParam(':precio', $precioEditar);
+        $stmt->bindParam(':id', $idEditar);
+        $stmt->execute();
     }
+    
 
     $sqlSelect = "SELECT * FROM `catalogos`";
     $sentencia = $conexion->prepare($sqlSelect);
@@ -130,26 +151,43 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./logo.png" />
     <link rel="stylesheet" href="styleAdmin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
     <title>Fauguet Admin</title>
   
    
 </head>
 <body>
+
+<nav class="navbarDashboard" onclick="toggleNavbarWidth()">
+<img src="./logo2.png" alt="logo">
+
+        <a href="" id="dashboard-link"><span class="icon"><i class="fas fa-home"></i></span>Inicio</a>
+        <a href="usuarios.php" id="usuarios-link"><span class="icon"><i class="fas fa-user"></i></span>Usuarios</a>
+    </nav>
+
+    <div class="table-container">
 <div id="crearCatalogoModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeCrearCatalogoModal()">&times;</span>
-        <h2>Crear Nuevo Catálogo</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
+     
+       <span class="close" onclick="closeCrearCatalogoModal()">&times;</span>
+      
+  
+    <form   class="form-modal" action="" method="POST" enctype="multipart/form-data">
+       <div class="inputs">
+       <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required  placeholder="Nombre">
+       </div>
        
 
 
-        <br>
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" required></textarea>
-        <br>
-        <label for="categoria">Categoria:</label>
+      
+      
+  
+     <div class="inputs">
+       <label for="categoria">Categoria:</label>
 <select id="categoria" name="categoria" required>
     <option value="notebook">Notebook</option>
     <option value="auricular">Auricular</option>
@@ -157,40 +195,52 @@ try {
     <option value="teclado">Teclado</option>
     <option value="mouse">Mouse</option>
 </select>
+       </div>
 
-        <br>
      
-         <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" required >
-        <br>
-        <label for="imagen">Imagen:</label>
+     
+       <div class="inputs">
+      <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required  placeholder="Precio">
+   
+      </div>
+      <div class="inputs">
+     <label for="descripcion">Descripción:</label>
+        <input id="descripcion" name="descripcion" required  placeholder="Descripción">
+     </div>
+      <div class="inputs">
+       <label for="imagen">Imagen:</label>
         <input type="file" id="imagen" name="imagen" accept="image/*" required>
-        <br>
-
-        <label for="imagen2">Imagen2:</label>
+       </div>
+      
+       
+       <div class="inputs">
+    <label for="imagen2">Imagen2:</label>
         <input type="file" id="imagen2" name="imagen2" accept="image/*" required>
-        <br>
+    </div>
         
-        <label for="imagen3">Imagen3:</label>
+       
+    <div class="inputs">
+<label for="imagen3">Imagen3:</label>
         <input type="file" id="imagen3" name="imagen3" accept="image/*" required>
-        <br>
-        
-        <label for="imagen4">Imagen4:</label>
+</div>
+   
+<div class="inputs">
+             
+       <label for="imagen4">Imagen4:</label>
         <input type="file" id="imagen4" name="imagen4" accept="image/*" required>
-        <br>
-        <button type="submit">Crear Catálogo</button>
+       </div>
+        <button  class="btn" type="submit">Crear catálogo</button>
     </form>
 
     </div>
 </div>
-    <div>
-        <?php echo $mensaje; ?>
-    </div>
-    <button onclick="openCrearCatalogoModal()">Crear Catálogo</button>
+  
+    <button class="btn_crear" onclick="openCrearCatalogoModal()">Agregar</button>
 
-    <h2>Catálogos Existentes</h2>
+   
     <?php if ($resultado): ?>
-        <table border="1">
+        <table  class="table">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -209,15 +259,23 @@ try {
                     <div id="myModal<?php echo $catalogo['id']; ?>" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('<?php echo $catalogo['id']; ?>')">&times;</span>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form  class="form-modal" action="" method="POST" enctype="multipart/form-data" >
+        
+                <div class="inputs">
                 <input type="hidden" name="editar" value="<?php echo $catalogo['id']; ?>">
-                <label for="nombre_editar">Nombre:</label>
+                </div>
+                <div class="inputs">
+             <label for="nombre_editar">Nombre:</label>
                 <input type="text" id="nombre_editar" name="nombre_editar" value="<?php echo $catalogo['nombre']; ?>" required>
-                <br>
-                <label for="descripcion_editar">Descripción:</label>
-                <textarea id="descripcion_editar" name="descripcion_editar" required><?php echo $catalogo['descripcion']; ?></textarea>
-                <br>
-                <label for="categoriaEditar">Categoria:</label>
+             </div>
+           
+             <div class="inputs">
+               <label for="descripcion_editar">Descripción:</label>
+                <input id="descripcion_editar" name="descripcion_editar"  value="<?php echo $catalogo['descripcion']; ?>"  required>
+               </div>
+               
+               <div class="inputs">
+               <label for="categoriaEditar">Categoria:</label>
 <select id="categoriaEditar" name="categoriaEditar" required>
     <option value="notebook" <?php echo ($catalogo['categoria'] === 'notebook') ? 'selected' : ''; ?>>Notebook</option>
     <option value="auricular" <?php echo ($catalogo['categoria'] === 'auriculares') ? 'selected' : ''; ?>>Auricular</option>
@@ -226,23 +284,35 @@ try {
        <option value="mouse" <?php echo ($catalogo['categoria'] === 'mouse') ? 'selected' : ''; ?>>Mouse</option>
 </select>
 
-                <br>
-                <label for="precioEditar">Precio:</label>
-                <textarea id="precioEditar" name="precioEditar" required><?php echo $catalogo['precio']; ?></textarea>
-                <br>
-                <label for="imagen_editar">Imagen:</label>
+               </div>
+              
+               <div class="inputs">
+             <label for="precioEditar">Precio:</label>
+                <input id="precioEditar" name="precioEditar" value="<?php echo $catalogo['precio']; ?>" required>
+             </div>
+             
+               
+             <div class="inputs">
+            <label for="imagen_editar">Imagen:</label>
                 <input type="file" id="imagen_editar" name="imagen_editar" accept="image/*">
-                <br>
-                <label for="imagen_editar2">Imagen2:</label>
+            </div>
+              
+        
+            <div class="inputs">
+            <label for="imagen_editar2">Imagen2:</label>
                 <input type="file" id="imagen_editar2" name="imagen_editar2" accept="image/*">
-                <br>
-                <label for="imagen_editar3">Imagen4:</label>
+            </div>
+             
+            <div class="inputs">
+             <label for="imagen_editar3">Imagen4:</label>
                 <input type="file" id="imagen_editar3" name="imagen_editar3" accept="image/*">
-                <br>
-                <label for="imagen_editar4">Imagen4:</label>
+             </div>
+               
+             <div class="inputs">
+           <label for="imagen_editar4">Imagen4:</label>
                 <input type="file" id="imagen_editar4" name="imagen_editar4" accept="image/*">
-                <br>
-                <button type="submit">Guardar</button>
+           </div>
+                <button class="btn" type="submit">Guardar</button>
             </form>
         </div>
     </div>
@@ -257,11 +327,13 @@ try {
 
                     <td><img src='data:image/jpeg;base64,<?php echo base64_encode($catalogo['imagen3']); ?>' alt='Imagen del catálogo' width='100'></td>
                     <td><img src='data:image/jpeg;base64,<?php echo base64_encode($catalogo['imagen4']); ?>' alt='Imagen del catálogo' width='100'></td>
-                <td>
-                <button onclick="openModal('<?php echo $catalogo['id']; ?>', '<?php echo $catalogo['nombre']; ?>', '<?php echo $catalogo['descripcion']; ?>')">Editar</button>
-                </td>
+               
                     <td>
-                        <a href="?eliminar=<?php echo $catalogo['id']; ?>" onclick="return confirm('¿Estás seguro que deseas eliminar este catálogo?')">Eliminar</a>
+                    <button class="editar_btn" onclick="openModal('<?php echo $catalogo['id']; ?>', '<?php echo $catalogo['nombre']; ?>', '<?php echo $catalogo['descripcion']; ?>')"> <span class="action-icon"><i class="fas fa-edit"></i></button>
+                      <button class="eliminar_btn" >
+                      <a href="?eliminar=<?php echo $catalogo['id']; ?>" onclick="return confirm('¿Estás seguro que deseas eliminar este catálogo?')"> <span class="action-icon"><i
+                                        class="fas fa-trash"></i></span></a>
+                      </button>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -269,6 +341,7 @@ try {
     <?php else: ?>
         <p>No se encontraron catálogos</p>
     <?php endif; ?>
+</div>
 
     <script>
         // Funciones para mostrar/ocultar el modal
@@ -290,6 +363,34 @@ try {
     function closeCrearCatalogoModal() {
         document.getElementById("crearCatalogoModal").style.display = "none";
     }
+
+    var currentPage = window.location.pathname.split('/').pop().toLowerCase();
+
+// Asignar la clase "active" al enlace correspondiente
+if (currentPage === 'dashboard.php' || currentPage === '') {
+    document.getElementById('dashboard-link').classList.add('active');
+} else if (currentPage === 'productos.html') {
+    document.getElementById('productos-link').classList.add('active');
+} else if (currentPage === 'usuarios.html') {
+    document.getElementById('usuarios-link').classList.add('active');
+}
+
+
     </script>
+    <?php if (!empty($mensaje)): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'sucess',
+                title: 'Mensaje',
+                text: "<?php echo $mensaje; ?>",
+            });
+        });
+    </script>
+<?php endif; ?>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
 </body>
 </html>

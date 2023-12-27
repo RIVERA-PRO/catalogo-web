@@ -74,14 +74,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styleAdmin.css">
-    <title>Fauguet Admin - Mostrar Usuarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <title>Fauguet Admin -  Usuarios</title>
 </head>
 <body>
+<nav class="navbarDashboard" onclick="toggleNavbarWidth()">
+<img src="./logo2.png" alt="logo">
 
-    <h2>Usuarios Existentes</h2>
-    <button onclick="openCrearUsuarioModal()">Crear Usuario</button>
+        <a href="dashboard.php" id="dashboard-link"><span class="icon"><i class="fas fa-home"></i></span>Inicio</a>
+        <a href="usuarios.php" id="usuarios-link"><span class="icon"><i class="fas fa-user"></i></span>Usuarios</a>
+    </nav>
+
+    <div class="table-container">
+    <button class="btn_crear" onclick="openCrearUsuarioModal()">Crear Usuario</button>
     <?php if ($resultadoUsuarios): ?>
-        <table border="1">
+        <table class="table">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -99,8 +107,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
                     <td><img src='data:image/jpeg;base64,<?php echo base64_encode($usuario['imagen']); ?>' alt='Imagen del usuario' width='100'></td>
 
                     <td>
-                        <a href="?eliminar_usuario=<?php echo $usuario['id']; ?>" onclick="return confirm('¿Estás seguro que deseas eliminar este usuario?')">Eliminar</a>
-                        <button onclick="openEditarUsuarioModal('<?php echo $usuario['id']; ?>')">Editar</button>
+                       <button class="eliminar_btn" >
+                       <a href="?eliminar_usuario=<?php echo $usuario['id']; ?>" onclick="return confirm('¿Estás seguro que deseas eliminar este usuario?')"><span class="action-icon"><i
+                                        class="fas fa-trash"></i></span></a>
+                       </button>
+                        <button class="editar_btn" onclick="openEditarUsuarioModal('<?php echo $usuario['id']; ?>')"><span class="action-icon"><i class="fas fa-edit"></i></button>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -113,15 +124,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
     <div class="modal-content">
         <span class="close" onclick="closeEditarUsuarioModal()">&times;</span>
         <h2>Editar Usuario</h2>
-        <!-- Contenido del formulario de edición -->
-        <form id="formEditarUsuario" method="POST">
-            <!-- Campos del formulario (nombre, email, contraseña, rol, imagen, etc.) -->
+       
+        <form class="form-modal" id="formEditarUsuario" method="POST">
+           
             <label for="rol_usuario_edit">Nuevo Rol:</label>
             <select id="rol_usuario_edit" name="rol_usuario_edit" required>
                 <option value="admin">Admin</option>
                 <option value="usuario">Usuario</option>
             </select>
-            <!-- Otros campos del formulario -->
+           
 
             <br>
             <button type="button" onclick="editarUsuario()">Guardar Cambios</button>
@@ -132,43 +143,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
     <div id="crearUsuarioModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeCrearUsuarioModal()">&times;</span>
-            <h2>Crear Nuevo Usuario</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for="nombre_usuario">Nombre:</label>
-        <input type="text" id="nombre_usuario" name="nombre_usuario" required>
+          
+    <form class="form-modal" action="" method="POST" enctype="multipart/form-data">
+    <div class="inputs">
+       <label for="nombre_usuario">Nombre:</label>
+        <input type="text" id="nombre_usuario" name="nombre_usuario" required placeholder="Nombre">
+       </div>
 
-        <br>
-        <label for="email_usuario">Correo Electrónico:</label>
-        <input type="email" id="email_usuario" name="email_usuario" required>
+      
+       <div class="inputs">
+      <label for="email_usuario">Email:</label>
+        <input type="email" id="email_usuario" name="email_usuario" required placeholder="Email">
+      </div>
 
-        <br>
-        <label for="contrasena_usuario">Contraseña:</label>
-        <input type="password" id="contrasena_usuario" name="contrasena_usuario" required>
+       
+      <div class="inputs">
+      <label for="contrasena_usuario">Contraseña:</label>
+        <input type="password" id="contrasena_usuario" name="contrasena_usuario" required placeholder="Contraseña">
 
-        <br>
+      </div>
+      
+      <div class="inputs">
         <label for="rol_usuario">Rol:</label>
 <select id="rol_usuario" name="rol_usuario" required>
     <option value="admin">Admin</option>
     <option value="usuario">Usuario</option>
 </select>
+        </div>
 
 
         
-        <br>
-        <label for="imagen_usuario">Imagen:</label>
+     
+        <div class="inputs">
+      <label for="imagen_usuario">Imagen:</label>
         <input type="file" id="imagen_usuario" name="imagen_usuario" accept="image/*" required>
+      </div>
 
-        <br>
-        <button type="submit" name="crear_usuario">Crear Usuario</button>
+      
+        <button class="btn"  type="submit" name="crear_usuario">Crear Usuario</button>
     </form>
 
         </div>
     </div>
 
-    <div>
-        <?php echo $mensajeUsuarios; ?>
+    
     </div>
 
+   
+   
+    <?php if (!empty($mensajeUsuarios)): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'sucess',
+                title: 'Mensaje',
+                text: "<?php echo $mensajeUsuarios; ?>",
+            });
+        });
+    </script>
+<?php endif; ?>
     <script>
         // Funciones para mostrar/ocultar el modal de Crear Usuario
         function openCrearUsuarioModal() {

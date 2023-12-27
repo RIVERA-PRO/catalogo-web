@@ -34,10 +34,13 @@ try {
                 $_SESSION['rol'] = $row['rol'];
     
                 if ($row['rol'] == 'admin') {
+                  
                     header("Location: dashboard.php");
                 } else {
-                    // Usuario no es admin, mostrar mensaje de error
+                  
                     $mensajeLogin = "Error: No tienes permisos de administrador.";
+                header("Location: loginDashboard.php" );
+                                exit();
                 }
                 exit();
             } else {
@@ -58,25 +61,37 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Fauguet - Iniciar Sesión</title>
 </head>
 <body>
+<div class="formContainer">
+<form action="" method="POST">
     <h2>Iniciar Sesión</h2>
-    <form action="" method="POST">
-        <label for="email_login">Correo Electrónico:</label>
-        <input type="email" id="email_login" name="email_login" required>
+        <input type="email" id="email_login" name="email_login" placeholder="Email"   required>
 
-        <br>
-        <label for="contrasena_login">Contraseña:</label>
-        <input type="password" id="contrasena_login" name="contrasena_login" required>
+       
+        <input type="password" id="contrasena_login" name="contrasena_login" placeholder="Contraseña"   required>
 
-        <br>
+       
         <button type="submit" name="iniciar_sesion">Iniciar Sesión</button>
     </form>
 
-    <div>
-        <?php echo $mensajeLogin; ?>
-    </div>
+</div>
+ 
+
+    <?php if (!empty($mensajeLogin)): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'info',
+                title: 'Mensaje',
+                text: "<?php echo $mensajeLogin; ?>",
+            });
+        });
+    </script>
+<?php endif; ?>
 </body>
 </html>

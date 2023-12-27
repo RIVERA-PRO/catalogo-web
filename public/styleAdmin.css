@@ -1,3 +1,26 @@
+:root{
+    --text-color: #000;
+    --text-color2: #5c5959;
+    --bg-color: #111111;
+    --gris:#fafafa;
+    --gris2:#f2f2f2;
+    --color1:#240354;
+    --color2:#752FB5;
+    --color3:rgba(31, 135, 233, 0.455);
+    --blanco: #fff;
+    --input:#c1bfbf;
+  }
+  *{
+    padding: 0 ;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 0.2s linear;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+   
+  }
+  a{
+    text-decoration: none;
+  }
 .modal {
     display: none;
     position: fixed;
@@ -8,7 +31,7 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
+    align-items: center;
 }
 
 .modal-content {
@@ -16,9 +39,48 @@
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 90%;
+    border-radius: 10px;
+    
+    
+}
+.form-modal{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+
+}
+.inputs input{
+    border: 1px solid #888;
+    width: 40vh;
+    border-radius: 6px;
+    padding: 10px;
+  
+}
+.inputs select{
+    border: 1px solid #888;
+    width: 40vh;
+    border-radius: 6px;
+    padding: 10px;
 }
 
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.btn{
+    padding: 10px;
+    background-color: var(--color2);
+    border-radius: 6px;
+    color: var(--blanco);
+    border: none;
+    cursor: pointer;
+}
 .close {
     color: #aaa;
     float: right;
@@ -31,4 +93,273 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.table-container {
+    max-height: 50vh;  
+    overflow: auto;
+    margin-top: 1rem;
+}
+.table-container::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+ 
+    cursor: pointer;
+    background-color: transparent;
+   
+}
+ 
+  .table-container::-webkit-scrollbar-thumb {
+    background-color: var(--color1); 
+    border-radius: 10px;
+    margin-top: 3rem;
+  }
+  
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: left;
+  
+}
+
+.table th, .table td {
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    color: var(--text-color2);
+    white-space: nowrap;
+        
+    
+}
+
+
+
+.table th {
+    background-color: #f2f2f2;
+    
+}
+
+
+.table tr:hover {
+    background-color: #f2f2f28b;
+}
+
+.noResult {
+    display:flexbox;
+    width: 20rem;
+    height:10px ;
+    border-radius: 7px;
+    animation: gradientMove 1s linear infinite;
+   
+}
+
+.table img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100%;
+ 
+}
+
+.deflex{
+    display: flex;
+    align-items: center;
+}
+.eliminar_btn span{
+    background-color: transparent;
+    border: none;
+    color: var(--color2);
+    border-radius: 3px;
+
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+.btn_crear{
+    background-color: var(--color2);
+    border-radius: 7px;
+    color: var(--blanco);
+    border: none;
+    font-size: 15px;
+    margin-bottom: 1rem;
+    padding: 10px 20px;
+    
+}
+button{
+    border: none;
+    cursor: pointer;
+}
+.editar_btn span{
+background-color: transparent;
+border: none;
+color: red;
+border-radius: 3px;
+font-size: 17px;
+}
+
+
+
+/*navabr dashboard*/
+body{
+    display: flex;
+    align-items: center;
+ 
+    
+}
+.navbarDashboard{
+    background-color: var(--color2);
+    display: flex;
+    flex-direction: column;
+    width: 4rem;
+    min-height:  100vh;
+    max-height: 100%;
+    padding: 20px 0rem 0% 6px;
+  
+    overflow: hidden;
+   
+    transition: width 0.5s;
+  
+    border-radius: 0px 10px 10px 0px;
+   
+
+   
+}
+.navbarDashboard:hover {
+    width: 25rem;
+    transition: width 0.5s;
+}
+.navbarDashboard img{
+    width: 13.7em;
+    padding: 0px 0.2rem;
+}
+
+.content_tables {
+    transition: height 0.5s, width 0.5s;
+}
+.navbarDashboard a{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    color: var(--blanco);
+    margin-top: 1rem;
+    padding: 10px 1.1em;
+    border-radius:30px 0px 0px 30px ;
+    -webkit-border-radius:30px 0px 0px 30px ;
+    -moz-border-radius:30px 0px 0px 30px ;
+    -ms-border-radius:30px 0px 0px 30px ;
+    -o-border-radius:30px 0px 0px 30px ;
+}
+.navbarDashboard a:hover{
+    background-color: var(--blanco);
+    color: var(--color2);
+}
+.navbarDashboard a.active {
+    background-color: var(--blanco);
+    color: var(--color2);
+
+}
+.table-container {
+    background-color: var(--blanco);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.203);
+    width: 100%;
+    min-height: 80vh;
+    margin: 2rem;
+    border-radius: 10px;
+    padding: 20px;
+
+}
+@media (max-width: 1024px){
+    body{
+     
+        flex-direction: column;
+        gap: 1rem;
+        
+    }
+
+    .navbarDashboard{
+        border-radius:0;
+        width: 100%;
+        min-height:  4rem;
+        max-height: 4rem;
+        transition: min-height 0.5s;
+}
+.navbarDashboard:hover {
+    min-height:  40vh;
+    width: 100%;
+    transition: min-height 0.5s;
+  
+}
+.navbarDashboard img{
+    width: 120px;
+   
+}
+.table-container {
+    min-height: 100%;
+    margin: 0rem;
+    padding: 10px;
+
+}
+}
+
+
+@media (max-width: 710px){
+
+    .inputs input{
+        width: 100%;
+        padding: 6px;
+    }
+    .inputs select{
+        width: 100%;
+        padding: 6px;
+    }
+    .inputs label{
+      font-size: 13px;
+    }
+    
+.inputs {
+   
+    width: 100%;
+}
+    form{
+       
+        gap: 1rem;
+        margin-top: 1rem;
+    
+    }
+
+
+    .table {
+        width: auto; 
+    }
+
+    .table-container {
+        width: 100%; 
+        overflow-x: scroll; 
+        max-height: 100%;  
+    }
+    .filterText {
+      
+        width: 100%;
+      
+    }
+    .table th, .table td {
+        padding: 5px;
+        white-space: nowrap;
+        
+        text-overflow: ellipsis;
+        max-width: 10ch;
+        font-size: 13px;
+    }
+    .table img {
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+        border-radius: 100%;
+        
+    }
+  
 }
